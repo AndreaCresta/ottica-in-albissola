@@ -152,6 +152,9 @@ function vitePluginManusDebugCollector(): Plugin {
 const plugins = [react(), tailwindcss(), vitePluginManusRuntime(), vitePluginManusDebugCollector()];
 
 export default defineConfig({
+  // ATTENZIONE: Se pubblichi su GitHub Pages SENZA un dominio personalizzato (es. username.github.io/ottica-in-albissola)
+  // rimuovi il commento dalla riga sottostante per far funzionare i percorsi di CSS e immagini:
+  // base: "/ottica-in-albissola/",
   plugins,
   resolve: {
     alias: {
