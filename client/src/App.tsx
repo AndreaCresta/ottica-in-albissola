@@ -1,7 +1,7 @@
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
-import { Route, Switch } from "wouter";
+import { Route, Switch, Router as WouterRouter } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
@@ -31,7 +31,9 @@ function SmoothScroll({ children }: { children: React.ReactNode }) {
   return <>{children}</>;
 }
 
-function Router() {
+const basePath = import.meta.env.BASE_URL?.replace(/\/$/, "") || "";
+
+function AppRouter() {
   return (
     <Switch>
       <Route path={"/"} component={Home} />
@@ -48,7 +50,9 @@ function App() {
         <TooltipProvider>
           <SmoothScroll>
             <Toaster />
-            <Router />
+            <WouterRouter base={basePath}>
+              <AppRouter />
+            </WouterRouter>
           </SmoothScroll>
         </TooltipProvider>
       </ThemeProvider>

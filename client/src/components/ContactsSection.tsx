@@ -6,7 +6,6 @@
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { MapPin, Phone, Clock, Instagram, MessageCircle } from 'lucide-react';
-import { MapView } from './Map';
 
 const hours = [
   { day: 'Lunedì', time: 'Chiuso' },
@@ -22,29 +21,7 @@ export default function ContactsSection() {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: '-80px' });
 
-  const handleMapReady = (map: google.maps.Map) => {
-    const position = { lat: 44.3317, lng: 8.4997 };
-    map.setCenter(position);
-    map.setZoom(16);
-    map.setOptions({
-      styles: [
-        { elementType: 'geometry', stylers: [{ color: '#f5f5f5' }] },
-        { elementType: 'labels.icon', stylers: [{ visibility: 'off' }] },
-        { elementType: 'labels.text.fill', stylers: [{ color: '#616161' }] },
-        { elementType: 'labels.text.stroke', stylers: [{ color: '#f5f5f5' }] },
-        { featureType: 'road', elementType: 'geometry', stylers: [{ color: '#ffffff' }] },
-        { featureType: 'road.arterial', elementType: 'labels.text.fill', stylers: [{ color: '#757575' }] },
-        { featureType: 'road.highway', elementType: 'geometry', stylers: [{ color: '#dadada' }] },
-        { featureType: 'water', elementType: 'geometry', stylers: [{ color: '#c9c9c9' }] },
-        { featureType: 'poi', elementType: 'geometry', stylers: [{ color: '#eeeeee' }] },
-      ],
-    });
-    new google.maps.marker.AdvancedMarkerElement({
-      position,
-      map,
-      title: 'Ottica IN Albissola Marina',
-    });
-  };
+
 
   return (
     <section id="contatti" className="py-24 md:py-32 bg-white">
@@ -173,10 +150,18 @@ export default function ContactsSection() {
             transition={{ duration: 0.7, delay: 0.3 }}
             className="h-[480px] lg:h-[560px] overflow-hidden border border-[#EAEAE8]"
           >
-            <MapView
-              onMapReady={handleMapReady}
-              className="w-full h-full"
-            />
+            <iframe
+              width="100%"
+              height="100%"
+              id="gmap_canvas"
+              src="https://maps.google.com/maps?q=Piazza+Sant'Antonio,+Albissola+Marina,+Italia&t=&z=16&ie=UTF8&iwloc=&output=embed"
+              frameBorder="0"
+              scrolling="no"
+              marginHeight={0}
+              marginWidth={0}
+              className="w-full h-full grayscale"
+              title="Mappa Ottica IN Albissola Marina"
+            ></iframe>
           </motion.div>
         </div>
       </div>
